@@ -6,7 +6,7 @@ This tool is a Denial of Service (DoS) tool designed to send a high volume of HT
 
 ## Features
 - Sends a large number of HTTP requests to a target server
-- Supports different types of HTTP requests (GET, POST, etc.)
+- Supports different types of HTTP requests (GET, POST, etc.) - Coming Soon
 - Provides options for controlling the rate and intensity of the attack
 
 ## Installation
