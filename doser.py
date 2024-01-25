@@ -44,7 +44,7 @@ class Doser:
             t.start()
         for t in threading.enumerate():
             if t != threading.current_thread():
-                t.join(1) # Wait 1 sec for thread to finish
+                t.join() # Wait 1 sec for thread to finish
 
     def _attack(self):
         '''
@@ -58,10 +58,12 @@ class Doser:
                     error("Rate limited")
                     if not self.continue_on_error:
                         self.stop.set()
+                        pass
                 elif r.status_code == 500:
                     critical("Site seems to be down - 500 Internal Server Error")
                     if not self.continue_on_error:
                         self.stop.set()
+                        pass
             except requests.exceptions.ReadTimeout:
                 warning("Request timed out")
                 pass
@@ -69,6 +71,11 @@ class Doser:
                 critical("Site seems to be down - Connection error")
                 if not self.continue_on_error:  
                     self.stop.set()
+            except Exception as e:
+                error(f"Unknown error: {e}")
+                if not self.continue_on_error:
+                    self.stop.set()
+                    pass
 
 def banner():
     print(r'''
