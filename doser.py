@@ -59,8 +59,8 @@ class Doser:
                     if not self.continue_on_error:
                         self.stop.set()
                         pass
-                elif r.status_code == 500:
-                    critical("Site seems to be down - 500 Internal Server Error")
+                elif r.status_code in (500,502,503,504):
+                    critical(f"Site seems to be down - Status code {r.status_code}")
                     if not self.continue_on_error:
                         self.stop.set()
                         pass
